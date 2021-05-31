@@ -14,32 +14,32 @@ volumes:
 
 services:
   db:
-    image: mariadb:10.4
+    image: mariadb:latest
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: unless-stopped
     volumes:
       - nextcloud_db:/var/lib/mysql
     environment:
-      - TZ=Pacific/Auckland
+      - TZ=Europe/Berlin
       - MYSQL_ROOT_PASSWORD=
       - MYSQL_PASSWORD=
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=root
 
   nextcloud:
-    image: nextcloud:16.0.3
+    image: nextcloud:latest
     expose:
       - '80'
     volumes:
       - nextcloud_html:/var/www/html
     environment:
-      - TZ=Pacific/Auckland
+      - TZ=Europe/Berlin
     restart: unless-stopped
     depends_on:
       - db
 
   proxy:
-    image: linuxserver/letsencrypt:letsencrypt:0.36.0-ls44
+    image: linuxserver/letsencrypt:latest
     ports:
       - '80:80'
       - '443:443'
@@ -53,7 +53,7 @@ services:
       - EMAIL=
       - URL=
       - SUBDOMAINS=cloud,office
-      - TZ=Pacific/Auckland
+      - TZ=Europe/Berlin
       - ONLY_SUBDOMAINS=true
     depends_on:
       - nextcloud
@@ -61,7 +61,7 @@ services:
       - cron
 
   onlyoffice:
-    image: onlyoffice/documentserver:5.3.4.3
+    image: onlyoffice/documentserver:latest
     expose:
       - '80'
       - '443'
@@ -69,7 +69,7 @@ services:
       - document_data:/var/www/onlyoffice/Data
       - document_log:/var/log/onlyoffice
     environment:
-      - TZ=Pacific/Auckland
+      - TZ=Europe/Berlin
     restart: unless-stopped
     depends_on:
       - nextcloud
