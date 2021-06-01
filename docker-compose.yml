@@ -38,8 +38,8 @@ services:
     depends_on:
       - db
 
-  proxy:
-    image: linuxserver/letsencrypt:latest
+  swag:
+    image: linuxserver/swag:latest
     ports:
       - '80:80'
       - '443:443'
