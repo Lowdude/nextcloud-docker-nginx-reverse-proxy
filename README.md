@@ -80,7 +80,7 @@ Restore: `docker cp ./config.php nextclouddockernginxreverseproxy_nextcloud_1:/v
 | - | - | - |
 | overwritehost | `docker-compose exec --user www-data nextcloud ./occ config:system:set overwritehost --value=cloud.yourdomain.com` | Replace `cloud.yourdomain.com` with your real domain that Nextcloud will be assigned to |
 | overwriteprotocol | `docker-compose exec --user www-data nextcloud ./occ config:system:set overwriteprotocol --value=https` | - |
-| trusted_proxies | `docker-compose exec --user www-data nextcloud ./occ config:system:set trusted_proxies 0 --value=proxy` | - |
+| trusted_proxies | `docker-compose exec --user www-data nextcloud ./occ config:system:set trusted_proxies 0 --value=swag` | - |
 
 ## Using CollaboraOnline instead of OnlyOffice (optional)
 Edit `docker-compose.yml`, remove references to `onlyoffice`, replace the `onlyoffice` related chunk with:
