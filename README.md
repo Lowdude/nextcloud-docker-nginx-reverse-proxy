@@ -16,7 +16,7 @@ A Docker based Nextcloud stack.
 - Nextcloud
 - MariaDB / db
 - OnlyOffice (or [CollaboraOnline](#using-collaboraonline-instead-of-onlyoffice-optional))
-- LetsEncrypt / nginx / Proxy
+- LetsEncrypt / nginx / Swag
 - Cron
 
 ## DNS setup
@@ -43,7 +43,7 @@ Set your MySQL passwords
       - MYSQL_USER=root
 ```
 
-##### LetsEncrypt / proxy
+##### LetsEncrypt / swag
 Set your `email` address, domain `URL`, and if necessary tweak the `SUBDOMAINS`.
 ```yaml
     environment:
@@ -62,9 +62,9 @@ In `nginx.cfg`, adjust the value after each `server_name` to fit your set up.
 | # | Command |  
 | - | - |  
 | 1. | `docker-compose up -d` | Run the containers |  
-| 2. | `docker-compose logs proxy` | Watch the logs until the certificates have been generated, after they have been continue onto #3 |  
+| 2. | `docker-compose logs swag` | Watch the logs until the certificates have been generated, after they have been continue onto #3 |  
 
-If you're unable to connect to some services, after the initial deployment try restarting the proxy via: `docker-compose restart proxy`.  
+If you're unable to connect to some services, after the initial deployment try restarting the swag via: `docker-compose restart swag`.  
 
 ## Initalising your setup
 ##### Nextcloud
@@ -75,7 +75,7 @@ If you're unable to connect to some services, after the initial deployment try r
 Backup: `docker-compose exec app cat /var/www/html/config/config.php > config.php`  
 Restore: `docker cp ./config.php nextclouddockernginxreverseproxy_nextcloud_1:/var/www/html/config/config.php`  
 
-## Configuring Nextcloud to trust the proxy
+## Configuring Nextcloud to trust the swag
 | Property | Command | Notes |
 | - | - | - |
 | overwritehost | `docker-compose exec --user www-data nextcloud ./occ config:system:set overwritehost --value=cloud.yourdomain.com` | Replace `cloud.yourdomain.com` with your real domain that Nextcloud will be assigned to |
