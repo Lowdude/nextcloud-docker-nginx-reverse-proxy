@@ -17,7 +17,6 @@ A Docker based Nextcloud stack.
 - MariaDB / db
 - OnlyOffice (or [CollaboraOnline](#using-collaboraonline-instead-of-onlyoffice-optional))
 - LetsEncrypt / nginx / Swag
-- Cron
 
 ## DNS setup
 | Subdomain | Service |
@@ -111,12 +110,13 @@ Update `onlyoffice` in your `nginx.cfg` to `collabora`.
 2. Find and install the OnlyOffice or CollaboraOnline connectors
 
 ### Background jobs
-Edit `crontab_root` replace the domain placeholder with what your Nextcloud instance will be running on.
-Important: make sure `crontab_root` is owned by `root:root` before launching the `cron` container.  
-1. set up a cronjob to run background jobs: (for some reason the docker container provided doesn't support background jobs via cron)  
-  1.1. Log into an Admin user in Nextcloud  
-  1.2. Go to Settings > Administration > Basic Settings  
-  1.3. Under 'Background jobs', toggle Webcron  
+
+1. set up a cronjob to run background jobs:  
+  1.1. run `crontab -e`\
+  1.2. add `*/5 * * * * docker exec -u www-data nextcloud-docker-nginx-reverse-proxy_nextcloud_1 php cron.php`\
+  1.3. Log into an Admin user in Nextcloud  
+  1.4. Go to Settings > Administration > Basic Settings  
+  1.5. Under 'Background jobs', toggle cron  
 
 ## Useful links
 - [Nextcloud reverse proxy configuration](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/reverse_proxy_configuration.html)  
