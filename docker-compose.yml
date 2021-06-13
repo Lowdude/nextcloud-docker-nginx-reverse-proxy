@@ -58,7 +58,6 @@ services:
     depends_on:
       - nextcloud
       - onlyoffice
-      - cron
 
   onlyoffice:
     image: onlyoffice/documentserver:latest
@@ -73,12 +72,3 @@ services:
     restart: unless-stopped
     depends_on:
       - nextcloud
-
-  cron:
-    image: tigpt/cronjobs
-    volumes:
-      - ./crontab_root:/etc/crontabs/root
-    restart: unless-stopped
-    depends_on:
-      - nextcloud
-
